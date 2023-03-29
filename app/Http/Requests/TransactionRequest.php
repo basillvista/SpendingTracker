@@ -23,11 +23,11 @@ class TransactionRequest extends FormRequest
      */
     public function rules()
     {
-        return [            'status'=>'required',
-            'job'=>'required',
-            'description'=>'required',
-            'income'=>'required',
-
+        return [
+            'status'=>'required',
+            'task'=>'required|string',
+            'description'=>'string',
+            'value'=>'required|integer',
         ];
     }
 }

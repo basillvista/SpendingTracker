@@ -10,7 +10,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable=['status','income','job'];
+    protected $fillable=['status','value','task', 'description'];
 
     protected $table = 'transactions';
 

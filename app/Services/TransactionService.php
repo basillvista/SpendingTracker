@@ -5,20 +5,21 @@ namespace App\Services;
 use App\Http\Requests\TransactionRequest;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class TransactionService
 {
-    public int $budget;
 
-    public function storeUser(TransactionRequest $request): void
+
+    public function storeUser(TransactionRequest $request): RedirectResponse
     {
-        $input=$request->only('status','job', 'income','description');
-        $transaction=new Transaction();
-        $transaction->status=$input['status'];
-        $transaction->job=$input['job'];
-        $transaction->description=$input['description'] ?? NULL;
-        $transaction->income=$input['income'];
-        $transaction->user_id=Auth()->user()->id;
+        $transaction = new Transaction;
+        $transaction->status = $request->status;
+        $transaction->task = $request->task;
+        $transaction->description = $request->description;
+        $transaction->value = $request->value;
+        $transaction->user_id = $request->user_id;
         $transaction->save();
     }
 
@@ -34,5 +35,5 @@ class TransactionService
         return $budget;
     }
 
-    //function to count number of transcations today, in a month, in a year, make tests, make request;
+
 }

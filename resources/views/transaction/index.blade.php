@@ -28,12 +28,12 @@
 
 <!-- (B) MAIN -->
 <main id="pgmain">
-    <div><h1><a href="{{ route('transaction.create') }}">Add Income</a></h1></div>
+    <div><h1><a href="{{ route('transaction.create') }}">Add Transaction</a></h1></div>
     <div class="table">
         <div class="table-header">
-            <div class="header__item"><a>Job</a></div>
+            <div class="header__item"><a>Task</a></div>
             <div class="header__item"><a>Status</a></div>
-            <div class="header__item"><a>Income</a></div>
+            <div class="header__item"><a>Value</a></div>
             <div class="header__item"><a>View</a></div>
             <div class="header__item"><a>Created at</a></div>
             <div class="header__item"><a>Updated at</a></div>
@@ -41,9 +41,9 @@
         <div class="table-content">
             @foreach($transactions as $transaction)
             <div class="table-row">
-                <div class="table-data">{{$transaction->job}}</div>
+                <div class="table-data">{{$transaction->task}}</div>
                 <div class="table-data">{{$transaction->status}}</div>
-                <div class="table-data">{{$transaction->income}}</div>
+                <div class="table-data">{{$transaction->value}}</div>
                 <div class="table-data">
                     <a href="{{ route('transaction.show', ['transaction'=>$transaction]) }}">View</a>
                 </div>

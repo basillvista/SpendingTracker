@@ -33,10 +33,10 @@
         @method('PUT')
         <div class="form-style-8">
             <h2>Edit transaction</h2>
-            <label>Job</label>
-            <input type="text" name="job" placeholder="{{ $transaction->job }}">
-            <label>Income</label>
-            <input type="text" name="income" placeholder="{{ $transaction->income }}">
+            <label>Task</label>
+            <input type="text" name="job" placeholder="{{ $transaction->task }}">
+            <label>Value</label>
+            <input type="text" name="value" placeholder="{{ $transaction->income }}">
             <label>Description</label>
             <input type="text" name="description" placeholder="{{ $transaction->description }}">
             <label>Status</label>

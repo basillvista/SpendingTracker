@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('job');
+            $table->string('task');
             $table->string('description')->nullable();
             $table->string('status');
-            $table->integer('income');
+            $table->integer('value');
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

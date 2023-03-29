@@ -28,14 +28,23 @@
 
 <!-- (B) MAIN -->
 <main id="pgmain">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{ route('transaction.store') }}">
         @csrf
         <div class="form-style-8">
             <h2>Create transaction</h2>
-            <label>Job</label>
-            <input type="text" name="job">
-            <label>Income</label>
-            <input type="text" name="income">
+            <label>task</label>
+            <input type="text" name="task">
+            <label>Value</label>
+            <input type="text" name="value">
             <label>Description</label>
             <input type="text" name="description">
             <label>Status</label>
