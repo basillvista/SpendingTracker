@@ -28,34 +28,26 @@
 
 <!-- (B) MAIN -->
 <main id="pgmain">
-    <div><h1><a href="{{ route('transaction.create') }}">Add Income</a></h1></div>
-    <div><h1 style="float:right">Budget - {{$budget . 'zł'}}</h1></div>
-    <div class="table">
-        <div class="table-header">
-            <div class="header__item"><a>Job</a></div>
-            <div class="header__item"><a>Status</a></div>
-            <div class="header__item"><a>Income</a></div>
+    <form method="POST" action="{{ route('transaction.store') }}">
+        @csrf
+        <div class="form-style-8">
+            <h2>Create client</h2>
+            <label>Job</label>
+            <input type="text" name="job">
+            <label>Income</label>
+            <input type="text" name="income">
+            <label>Status</label>
+            <select>
+                <option>income</option>
+                <option>outflow</option>
+            </select>
+            <input type="submit" name="submit">
         </div>
-        <div class="table-content">
-            @foreach($transactions as $transaction)
-            <div class="table-row">
-                <div class="table-data">{{$transaction->job}}</div>
-                <div class="table-data">{{$transaction->status}}</div>
-                <div class="table-data">{{$transaction->income}}</div>
-                <div> <td rowspan="2">
-                        <a href="{{ route('transaction.edit', ['transaction'=>$transaction]) }}">E</a>
-                        <a href="{{ route('transaction.destroy', ['transaction'=>$transaction]) }}">D</a>
-                    </td></div> <br>
-            </div>
-            @endforeach
-        </div>
-    </div>
+    </form>
 
 </main>
 
 
 
 </body>
-
 </html>
-

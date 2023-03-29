@@ -1,7 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
 
-Route::get('/main', [\App\Http\Controllers\Controller::class, 'create'])->name('create');
-Route::get('/results', [\App\Http\Controllers\Controller::class, 'results'])->name('results');
-Route::post('/main/store', [\App\Http\Controllers\Controller::class, 'store'])->name('store');
-Route::get('/delete/{id}', [\App\Http\Controllers\Controller::class, 'delete'])->name('delete');
-Route::get('/edit/{id}', [\App\Http\Controllers\Controller::class, 'edit'])->name('edit');
+Route::resource('transaction', TransactionController::class)->middleware('auth');
+

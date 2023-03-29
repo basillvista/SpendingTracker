@@ -37,17 +37,17 @@
             <div class="header__item"><a>Income</a></div>
         </div>
         <div class="table-content">
-            @foreach($transactions as $transaction)
-            <div class="table-row">
-                <div class="table-data">{{$transaction->job}}</div>
-                <div class="table-data">{{$transaction->status}}</div>
-                <div class="table-data">{{$transaction->income}}</div>
-                <div> <td rowspan="2">
-                        <a href="{{ route('transaction.edit', ['transaction'=>$transaction]) }}">E</a>
-                        <a href="{{ route('transaction.destroy', ['transaction'=>$transaction]) }}">D</a>
-                    </td></div> <br>
-            </div>
-            @endforeach
+                <div class="table-row">
+                    <div class="table-data">{{$transaction->job}}</div>
+                    <div class="table-data">{{$transaction->status}}</div>
+                    <div class="table-data">{{$transaction->income}}</div>
+                    <div class="table-data">{{$transaction->created_at}}</div>
+                    <div class="table-data">{{$transaction->updated_at}}</div>
+                    <div> <td rowspan="2">
+                            <a href="{{ route('transaction.edit', ['transaction'=>$transaction]) }}">E</a>
+                            <a href="{{ route('transaction.destroy', ['transaction'=>$transaction]) }}">D</a>
+                        </td></div> <br>
+                </div>
         </div>
     </div>
 
@@ -58,4 +58,3 @@
 </body>
 
 </html>
-
