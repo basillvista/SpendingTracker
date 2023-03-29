@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TransactionRequest;
 use App\Models\Transaction;
-use App\Models\Transcation;
 use App\Services\TransactionService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TransactionController extends Controller
@@ -32,15 +30,7 @@ class TransactionController extends Controller
 
     public function store(TransactionRequest $request): RedirectResponse
     {
-        $input=$request->only('status','job', 'income','description');
-        $transaction=new Transaction();
-        $transaction->status=$input['status'];
-        $transaction->job=$input['job'];
-        $transaction->description=$input['description'] ?? NULL;
-        $transaction->income=$input['income'];
-        $transaction->user_id=Auth()->user()->id;
-        $transaction->save();
-
+        $this->transactionService->storeUser($request);
         return redirect()->route('transaction.index');
     }
 

@@ -29,7 +29,6 @@
 <!-- (B) MAIN -->
 <main id="pgmain">
     <div><h1><a href="{{ route('transaction.create') }}">Add Income</a></h1></div>
-    <div><h1 style="float:right">Budget - {{$budget . 'zł'}}</h1></div>
     <div class="table">
         <div class="table-header">
             <div class="header__item"><a>Job</a></div>
@@ -66,6 +65,7 @@
             @endforeach
         </div>
     </div>
+    <div><h1 style="float:right">Budget  {{$budget . 'zł'}}</h1></div>
 
 </main>
 
