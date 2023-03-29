@@ -31,13 +31,15 @@
     <form method="POST" action="{{ route('transaction.store') }}">
         @csrf
         <div class="form-style-8">
-            <h2>Create client</h2>
+            <h2>Create transaction</h2>
             <label>Job</label>
             <input type="text" name="job">
             <label>Income</label>
             <input type="text" name="income">
+            <label>Description</label>
+            <input type="text" name="description">
             <label>Status</label>
-            <select>
+            <select name="status">
                 <option>income</option>
                 <option>outflow</option>
             </select>

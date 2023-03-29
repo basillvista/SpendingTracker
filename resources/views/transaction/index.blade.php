@@ -35,19 +35,35 @@
             <div class="header__item"><a>Job</a></div>
             <div class="header__item"><a>Status</a></div>
             <div class="header__item"><a>Income</a></div>
+            <div class="header__item"><a>View</a></div>
+            <div class="header__item"><a>Created at</a></div>
+            <div class="header__item"><a>Updated at</a></div>
         </div>
         <div class="table-content">
-                <div class="table-row">
-                    <div class="table-data">{{$transaction->job}}</div>
-                    <div class="table-data">{{$transaction->status}}</div>
-                    <div class="table-data">{{$transaction->income}}</div>
-                    <div class="table-data">{{$transaction->created_at}}</div>
-                    <div class="table-data">{{$transaction->updated_at}}</div>
-                    <div> <td rowspan="2">
-                            <a href="{{ route('transaction.edit', ['transaction'=>$transaction]) }}">E</a>
-                            <a href="{{ route('transaction.destroy', ['transaction'=>$transaction]) }}">D</a>
-                        </td></div> <br>
+            @foreach($transactions as $transaction)
+            <div class="table-row">
+                <div class="table-data">{{$transaction->job}}</div>
+                <div class="table-data">{{$transaction->status}}</div>
+                <div class="table-data">{{$transaction->income}}</div>
+                <div class="table-data">
+                    <a href="{{ route('transaction.show', ['transaction'=>$transaction]) }}">View</a>
                 </div>
+                <div class="table-data">{{$transaction->created_at}}</div>
+                <div class="table-data">{{$transaction->updated_at}}</div>
+                <tr>
+                    <td rowspan="2">
+                        <a href="{{ route('transaction.edit', ['transaction'=>$transaction]) }}">E</a>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('transaction.destroy', ['transaction'=>$transaction]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" name="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr><br>
+            </div>
+            @endforeach
         </div>
     </div>
 
@@ -58,3 +74,4 @@
 </body>
 
 </html>
+
