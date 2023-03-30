@@ -1,7 +1,7 @@
 
 ## About SpendingTracker
 
-SpendingTracker was made in purpose of coding test, it features:
+SpendingTracker was made in purpose of coding test, it features:, it features:
 
 - Simple testing.
 - CRUD for Transactions.
