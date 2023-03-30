@@ -11,7 +11,8 @@ use Illuminate\View\View;
 class TransactionController extends Controller
 {
 
-    public function __construct(TransactionService $transactionService){
+    public function __construct(TransactionService $transactionService)
+    {
         $this->transactionService=$transactionService;
     }
 
@@ -31,7 +32,6 @@ class TransactionController extends Controller
     {
             $this->transactionService->storeUser($request);
             return redirect()->route('transaction.index');
-
     }
 
     public function show(Transaction $transaction): View
@@ -47,7 +47,7 @@ class TransactionController extends Controller
 
     public function update(TransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-            $input=$request->only('status','task', 'value','description');
+            $input=$request->only('status', 'task', 'value', 'description');
             $transaction->update(['status'=>$request['status'], 'task'=>$request['task'], 'description'=>$request['description'], 'value'=>$request['value']]);
             return redirect()->route('transaction.index');
     }

@@ -65,7 +65,7 @@
             @endforeach
         </div>
     </div>
-    <div><h1 style="float:right">Budget  {{$budget . 'zł'}}</h1></div>
+    <div><h1 style="float:right">Budget  {{$budget}}</h1></div>
 
 </main>
 

@@ -27,7 +27,7 @@ class TransactionRequest extends FormRequest
             'status'=>'required',
             'task'=>'required|string',
             'description'=>'string',
-            'value'=>'required|integer',
+            'value'=>'required|integer|gt:0',
         ];
     }
 }

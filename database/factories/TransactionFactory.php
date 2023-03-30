@@ -19,7 +19,7 @@ class TransactionFactory extends Factory
     {
         return [
             'task'=>$this->faker->word,
-            'description'=>'ss',
+            'description'=>$this->faker->word(),
             'status'=> $this->faker->randomElement(['income', 'outflow']),
             'value'=>$this->faker->numberBetween($min = 1, $max = 10000),
             'user_id'=> User::pluck('id')->random(),

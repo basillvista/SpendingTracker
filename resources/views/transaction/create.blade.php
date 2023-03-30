@@ -41,7 +41,7 @@
         @csrf
         <div class="form-style-8">
             <h2>Create transaction</h2>
-            <label>task</label>
+            <label>Task</label>
             <input type="text" name="task">
             <label>Value</label>
             <input type="text" name="value">

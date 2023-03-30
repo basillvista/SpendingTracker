@@ -28,15 +28,24 @@
 
 <!-- (B) MAIN -->
 <main id="pgmain">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{ route('transaction.update', ['transaction'=>$transaction]) }}">
         @csrf
         @method('PUT')
         <div class="form-style-8">
             <h2>Edit transaction</h2>
             <label>Task</label>
-            <input type="text" name="job" placeholder="{{ $transaction->task }}">
+            <input type="text" name="task" placeholder="{{ $transaction->task }}">
             <label>Value</label>
-            <input type="text" name="value" placeholder="{{ $transaction->income }}">
+            <input type="text" name="value" placeholder="{{ $transaction->value }}">
             <label>Description</label>
             <input type="text" name="description" placeholder="{{ $transaction->description }}">
             <label>Status</label>

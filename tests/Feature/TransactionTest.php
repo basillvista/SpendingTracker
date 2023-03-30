@@ -22,12 +22,9 @@ class TransactionTest extends TestCase
      */
     public function test_index()
     {
-        $transactionService = new TransactionService();
         $user = User::factory()->create();
         $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
         $this->actingAs($user);
-//        $budget = $transactionService->calculateBudget($transaction);
-//        $this->assertGreaterThanOrEqual(0, $budget);
         $response = $this->get(route('transaction.index', ['transaction'=>$transaction]));
         $response->assertStatus(200);
         $response->assertViewIs('transaction.index');
@@ -49,14 +46,14 @@ class TransactionTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
         $request = new TransactionRequest([
-            'status' => 'completed',
+            'status' => 'income',
             'task' => 'Buy groceries',
             'value' => 50,
             'description' => 'Grocery shopping'
         ]);
         $transactionService->storeUser($request);
         $this->assertDatabaseHas('transactions', [
-            'status' => 'completed',
+            'status' => 'income',
             'task' => 'Buy groceries',
             'value' => 50.0,
             'description' => 'Grocery shopping'
@@ -90,7 +87,7 @@ class TransactionTest extends TestCase
         $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
         $this->actingAs($user);
         $request = [
-            'status' => 'completed',
+            'status' => 'income',
             'task' => 'Buy groceries',
             'value' => 50,
             'description' => 'Grocery shopping'
@@ -108,5 +105,37 @@ class TransactionTest extends TestCase
         $response = $this->actingAs($user)->delete(route('transaction.destroy', ['transaction'=>$transaction]));
         $response->assertStatus(302);
         $response->assertRedirect(route('transaction.index'));
+    }
+
+    public function test_user_not_authorized()
+    {
+        $response = $this->get(route('transaction.index'));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('login'));
+    }
+
+    public function test_user_authorized_index()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get(route('transaction.index'));
+        $response->assertStatus(200);
+    }
+
+    public function test_calculate_budget()
+    {
+        $transactionService = new TransactionService();
+        $user = User::factory()->create();
+        $transactions = Transaction::factory(3)->create();
+        $this->actingAs($user);
+        $budget = $transactionService->calculateBudget($transactions);
+        $calculateBudget = 0;
+        foreach ($transactions as $transaction) {
+            if ($transaction->status === 'outflow') {
+                $calculateBudget -= $transaction->value;
+            } else {
+                $calculateBudget += $transaction->value;
+            }
+        }
+        $this->assertEquals($calculateBudget, $budget);
     }
 }
