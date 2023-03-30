@@ -35,6 +35,7 @@
             <div class="header__item"><a>Task</a></div>
             <div class="header__item"><a>Status</a></div>
             <div class="header__item"><a>Value</a></div>
+            <div class="header__item"><a>Description</a></div>
             <div class="header__item"><a>Created at</a></div>
             <div class="header__item"><a>Updated at</a></div>
         </div>
@@ -43,6 +44,7 @@
                     <div class="table-data">{{$transaction->task}}</div>
                     <div class="table-data">{{$transaction->status}}</div>
                     <div class="table-data">{{$transaction->value}}</div>
+                    <div class="table-data">{{$transaction->description}}</div>
                     <div class="table-data">{{$transaction->created_at}}</div>
                     <div class="table-data">{{$transaction->updated_at}}</div>
                     <tr>

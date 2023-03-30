@@ -34,6 +34,7 @@
             <div class="header__item"><a>Task</a></div>
             <div class="header__item"><a>Status</a></div>
             <div class="header__item"><a>Value</a></div>
+            <div class="header__item"><a>Description</a></div>
             <div class="header__item"><a>View</a></div>
             <div class="header__item"><a>Created at</a></div>
             <div class="header__item"><a>Updated at</a></div>
@@ -44,6 +45,7 @@
                 <div class="table-data">{{$transaction->task}}</div>
                 <div class="table-data">{{$transaction->status}}</div>
                 <div class="table-data">{{$transaction->value}}</div>
+                <div class="table-data">{{$transaction->description}}</div>
                 <div class="table-data">
                     <a href="{{ route('transaction.show', ['transaction'=>$transaction]) }}">View</a>
                 </div>
