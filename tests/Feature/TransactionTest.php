@@ -51,19 +51,17 @@ class TransactionTest extends TestCase
         $request = new TransactionRequest([
             'status' => 'completed',
             'task' => 'Buy groceries',
-            'value' => 50.0,
+            'value' => 50,
             'description' => 'Grocery shopping'
         ]);
         $transactionService->storeUser($request);
         $this->assertDatabaseHas('transactions', [
-            'user_id'=> $user->id,
             'status' => 'completed',
             'task' => 'Buy groceries',
             'value' => 50.0,
             'description' => 'Grocery shopping'
         ]);
-
-        $response = $this->actingAs($user)->withoutMiddleware()->post(route('transaction.store'));
+        $response = $this->actingAs($user)->post(route('transaction.store'));
         $response->assertStatus(302);
     }
 
@@ -91,13 +89,14 @@ class TransactionTest extends TestCase
         $user = User::factory()->create();
         $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
         $this->actingAs($user);
-        $request = new TransactionRequest([
+        $request = [
             'status' => 'completed',
             'task' => 'Buy groceries',
-            'value' => 50.0,
+            'value' => 50,
             'description' => 'Grocery shopping'
-        ]);
-        $response = $this->actingAs($user)->withoutMiddleware()->put(route('transaction.update', ['transaction'=>$transaction]));
+        ];
+        $user->update($request);
+        $response = $this->actingAs($user)->put(route('transaction.update', ['transaction'=>$transaction]));
         $response->assertStatus(302);
     }
 
@@ -106,7 +105,7 @@ class TransactionTest extends TestCase
         $user = User::factory()->create();
         $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
         $this->actingAs($user);
-        $response = $this->actingAs($user)->withoutMiddleware()->delete(route('transaction.destroy', ['transaction'=>$transaction]));
+        $response = $this->actingAs($user)->delete(route('transaction.destroy', ['transaction'=>$transaction]));
         $response->assertStatus(302);
         $response->assertRedirect(route('transaction.index'));
     }

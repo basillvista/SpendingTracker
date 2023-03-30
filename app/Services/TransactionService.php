@@ -12,14 +12,14 @@ class TransactionService
 {
 
 
-    public function storeUser(TransactionRequest $request): RedirectResponse
+    public function storeUser(TransactionRequest $request): void
     {
         $transaction = new Transaction;
         $transaction->status = $request->status;
         $transaction->task = $request->task;
         $transaction->description = $request->description;
         $transaction->value = $request->value;
-        $transaction->user_id = $request->user_id;
+        $transaction->user_id = Auth()->user()->id;
         $transaction->save();
     }
 
