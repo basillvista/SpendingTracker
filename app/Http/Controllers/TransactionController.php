@@ -18,8 +18,8 @@ class TransactionController extends Controller
 
     public function index(): View
     {
-            $transactions=Transaction::where('user_id', Auth()->user()->id)->get();
-            $budget=$this->transactionService->calculateBudget($transactions);
+        $transactions=Transaction::where('user_id', Auth()->user()->id)->get();
+        $budget=$this->transactionService->calculateBudget($transactions);
         return view('transaction.index', compact('budget', 'transactions'));
     }
 
@@ -30,8 +30,8 @@ class TransactionController extends Controller
 
     public function store(TransactionRequest $request): RedirectResponse
     {
-            $this->transactionService->storeUser($request);
-            return redirect()->route('transaction.index');
+        $this->transactionService->storeUser($request);
+        return redirect()->route('transaction.index');
     }
 
     public function show(Transaction $transaction): View
@@ -47,9 +47,9 @@ class TransactionController extends Controller
 
     public function update(TransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-            $input=$request->only('status', 'task', 'value', 'description');
-            $transaction->update(['status'=>$request['status'], 'task'=>$request['task'], 'description'=>$request['description'], 'value'=>$request['value']]);
-            return redirect()->route('transaction.index');
+        $input=$request->only('status', 'task', 'value', 'description');
+        $transaction->update(['status'=>$request['status'], 'task'=>$request['task'], 'description'=>$request['description'], 'value'=>$request['value']]);
+        return redirect()->route('transaction.index');
     }
 
     public function destroy(Transaction $transaction): RedirectResponse
