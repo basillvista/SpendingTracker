@@ -47,7 +47,6 @@ class TransactionController extends Controller
 
     public function update(TransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-        $input=$request->only('status', 'task', 'value', 'description');
         $transaction->update(['status'=>$request['status'], 'task'=>$request['task'], 'description'=>$request['description'], 'value'=>$request['value']]);
         return redirect()->route('transaction.index');
     }
